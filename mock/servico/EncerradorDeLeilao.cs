@@ -12,11 +12,13 @@ namespace mock.servico
     {
         public int total { get; private set; }
         public RepositorioDeLeiloes Dao { get; private set; }
+        private Carteiro Carteiro;
 
-        public EncerradorDeLeilao(RepositorioDeLeiloes dao)
+        public EncerradorDeLeilao(RepositorioDeLeiloes dao, Carteiro carteiro)
         {
             total = 0;
             Dao = dao;
+            Carteiro = carteiro;
         }
 
         public virtual void encerra()
@@ -28,11 +30,17 @@ namespace mock.servico
 
                 if (comecouSemanaPassada(l))
                 {
-
-                    l.encerra();
-                    total++;
-                    Dao.atualiza(l);
-
+                    try
+                    {
+                        l.encerra();
+                        total++;
+                        Dao.atualiza(l);
+                        Carteiro.envia(l);
+                    }
+                    catch (Exception e)
+                    {
+                        //log
+                    }
                 }
             }
         }
