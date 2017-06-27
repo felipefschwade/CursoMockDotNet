@@ -60,12 +60,16 @@
     <Compile Include="dominio\Pagamento.cs" />
     <Compile Include="dominio\Usuario.cs" />
     <Compile Include="infra\LeilaoDaoFalso.cs" />
+    <Compile Include="infra\PagamentoDAO.cs" />
     <Compile Include="infra\RepositorioDeLeiloes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="servico\Avaliador.cs" />
     <Compile Include="servico\Carteiro.cs" />
     <Compile Include="servico\EncerradorDeLeilao.cs" />
+    <Compile Include="servico\GeradorDePagamento.cs" />
+    <Compile Include="servico\Relogio.cs" />
+    <Compile Include="servico\RelogioDoSistema.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

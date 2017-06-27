@@ -13,6 +13,9 @@ namespace MockTest
     public class EncerradorDeLeilaoTest
     {
         private Leilao leilao;
+        private Usuario joao;
+        private Usuario maria;
+        private Usuario guilherme;
         private Leilao leilao2;
         private Leilao leilao3;
         private Mock<RepositorioDeLeiloes> dao;
@@ -21,12 +24,31 @@ namespace MockTest
         [TestInitialize()]
         public void TestInitialize()
         {
-            leilao = new Leilao("TV 21 pol");
-            leilao.naData(new DateTime(2017, 06, 11));
-            leilao2 = new Leilao("Play 4");
-            leilao2.naData(new DateTime(2017, 06, 10));
-            leilao3 = new Leilao("XBox");
-            leilao3.naData(DateTime.Now);
+            joao = new Usuario(1, "João");
+            maria = new Usuario(1, "Maria");
+            guilherme = new Usuario(1, "Guilherme");
+
+            leilao = new LeilaoBuilder("Xbox 360")
+                .Lance(joao, 300)
+                .Lance(maria, 400)
+                .Lance(guilherme, 600)
+                .NaData(new DateTime(2017, 06, 11))
+                .Build();
+
+            leilao2 = new LeilaoBuilder("Play 4")
+                .Lance(joao, 600)
+                .Lance(maria, 250)
+                .Lance(guilherme, 400)
+                .NaData(DateTime.Now.AddDays(-7))
+                .Build();
+
+            leilao3 = new LeilaoBuilder("Tv 42")
+                .Lance(joao, 550)
+                .Lance(maria, 650)
+                .Lance(guilherme, 700)
+                .NaData(DateTime.Now)
+                .Build();
+
             dao = new Mock<RepositorioDeLeiloes>();
             carteiro = new Mock<Carteiro>();
         }
